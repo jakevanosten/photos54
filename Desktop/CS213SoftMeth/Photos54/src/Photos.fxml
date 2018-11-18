@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import java.fx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+
+<!-- Photo Library Assignment
+	 CS213 Soft Meth
+	 
+	 Project Done by:
+	 		 Tiffany Moral (tm558)
+	 		 Jake Van Osten (jrv89) -->
+
+
+<BorderPane
+	xmlns = "http://javafx.com/javafx/8.0.60"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="songLibApp.SongLibController">
+	
+
+	<left>
+		<AnchorPane fx:id="Actual Library" prefWidth = "350.0" hgap="10" vgap="10">
+			<Text text = "Photo Library"
+		
+		
+		
+		
+		
+		
+		</AnchorPane>
+	
+	
+	</left>
+
+
+
+
+</BorderPane>
+
