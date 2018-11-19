@@ -27,6 +27,11 @@ import java.io.ObjectInputStream;
 
 public class PhotosController {
 
+	public void start(Stage primaryStage) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 }
