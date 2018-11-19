@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<?import com.gluonhq.charm.glisten.mvc.View?> -->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="data.PhotosController">
+   <children>
+      <Text layoutX="125.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo Library" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="53.0" />
+         </font>
+      </Text>
+      <SplitPane dividerPositions="0.5" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" layoutX="-1.0" prefHeight="232.0" prefWidth="297.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Login" wrappingWidth="296.5367431640625">
+                           <font>
+                              <Font name="System Bold" size="45.0" />
+                           </font>
+                        </Text>
+                        <TextField prefHeight="38.0" prefWidth="190.0" promptText="Username" />
+                        <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Sign-In" textAlignment="CENTER" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" layoutX="-1.0" prefHeight="209.0" prefWidth="297.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" New User" wrappingWidth="296.5367431640625">
+                           <font>
+                              <Font name="System Bold" size="45.0" />
+                           </font>
+                        </Text>
+                        <TextField prefHeight="37.0" prefWidth="297.0" promptText="Username" />
+                        <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Create User" textAlignment="CENTER" />
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
