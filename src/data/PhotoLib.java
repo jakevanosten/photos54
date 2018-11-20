@@ -28,7 +28,7 @@ public class PhotoLib extends Application {
 		libraryController.start(primaryStage);
 		
 		
-	
+		//Move menu bar to next scene (so probably within change scene)
 		MenuItem yourAccount = new MenuItem("Your Account");
         MenuItem adminControls = new MenuItem("Admin Controls");
         MenuItem logout = new MenuItem("Logout");

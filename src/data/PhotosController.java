@@ -41,6 +41,7 @@ public class PhotosController {
 	@FXML TextField loginField;
 	@FXML TextField newField;
 	@FXML MenuButton  userButton;
+	@FXML TextField searchTextField;
 
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub
@@ -125,4 +126,38 @@ public class PhotosController {
 		      alert.setHeaderText("Please type in a valid username.");
 		      alert.showAndWait();
 	}
+	
+	
+	
+	
+	
+	
+	//Search Field Methods
+	public void clearSearchField() {
+		searchTextField.clear();
+	}
+	
+	public void searchLibrary(ActionEvent e){
+		String searchInput;
+		
+		if (searchTextField.getText().isEmpty()) {
+			emptyFieldAlert();
+		}else {
+			searchInput = searchTextField.getText();
+			
+			//compare to items with date range
+			
+			//compare to items with same tag
+			
+				
+			
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 }
