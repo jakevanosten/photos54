@@ -1,23 +1,36 @@
 package data;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.layout.AnchorPane;
- import javafx.stage.Stage;
+import javafx.scene.layout.TilePane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 
 public class PhotoLib extends Application {
 	
 	static Stage window;
 	static Scene libScene;
+	static TilePane tilePane;
+	
+	
+	
 	
 	@Override
 	public void start(Stage primaryStage) 
@@ -34,32 +47,67 @@ public class PhotoLib extends Application {
 		
 		libScene = new Scene(root2);
 		
+		
+		
+		tilePane = new TilePane();
+		
+		
+	
+		
 		PhotosController libraryController = loader.getController();
 		libraryController.start(primaryStage);
 		
 		
-		//Move menu bar to next scene (so probably within change scene)
-		MenuItem yourAccount = new MenuItem("Your Account");
-        MenuItem adminControls = new MenuItem("Admin Controls");
-        MenuItem logout = new MenuItem("Logout");
-        MenuItem quitApp = new MenuItem("Quit Application");
-	
-        //FileInputStream input = new FileInputStream("resources/images/iconmonstr-menu-5-32.png");
-        //Image image = new Image(input);
-        //ImageView imageView = new ImageView(image);
-        //MenuButton userButton = new MenuButton("User Settings", imageView, yourAccount, adminControls, logout, quitApp);
-        
-        MenuButton userButton = new MenuButton("User Settings", null, yourAccount, adminControls, logout, quitApp);
-        
-        
 		Scene scene = new Scene(root);
-		root.getChildren().addAll(userButton);
+
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Photo Library Login");  
 		primaryStage.show();
 		
 	}
+	/* trying to see if i can load tile pane
+	 protected Void call() throws Exception {
+         DirectoryChooser directoryChooser = new DirectoryChooser();
+         final File selectedDirectory = directoryChooser.showDialog(null);
+         //there is an ImageFileFilter class below
+         File[] imageFiles = selectedDirectory.listFiles(new FilenameFilter());
+
+         tilePane.getChildren().clear();
+         if(){
+        	 
+         }
+         else{
+        	 for (File file : imageFiles) {
+             	try {
+                     ImageView imageView = new ImageView();
+                  
+                     //add imageView to the TilePane
+                     tilePane.getChildren().add(imageView);
+             	} catch (FileNotFoundException e) {             
+             		e.printStackTrace();
+             	}
+         	}   
+         	return null;
+         }
+     }
+ 
 	
+	 private class ImageFileFilter implements FileFilter {
+		 
+	        private final String[] validFileExtension = new String[] {"jpg", "jpeg", "png", "gif"}; 
+	        public boolean accept(File pathname) {
+	            for (String extension : validFileExtension) {
+	                if (pathname.getName().toLowerCase().endsWith(extension)) {
+	                    return true;
+	                }
+	            }
+	            return false;
+	        }
+	 
+	    }
+	 
+	 */
+	 
 	public void changeScene(String fxml,Stage primaryStage) throws IOException{
 	    Parent pane = FXMLLoader.load(
 	           getClass().getResource(fxml));

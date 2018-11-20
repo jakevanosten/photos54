@@ -129,6 +129,24 @@ public class PhotosController {
 		      alert.showAndWait();
 	}
 	
+	private void emptySearchFieldAlert() {
+		Alert alert = 
+		         new Alert(AlertType.INFORMATION);
+		      alert.setTitle("Error - Empty Field");
+		      alert.setHeaderText("Please type in a valid search field.");
+		      alert.showAndWait();
+	}
+	
+	
+	public void displayStock(){
+		
+		if(loginField.getText().equals("stock"){
+			
+		}
+		
+		
+		
+	}
 	
 	public void displayMenu() {
 		
@@ -163,7 +181,7 @@ public class PhotosController {
 		String searchInput;
 		
 		if (searchTextField.getText().isEmpty()) {
-			emptyFieldAlert();
+			emptySearchFieldAlert();
 		}else {
 			searchInput = searchTextField.getText();
 			
@@ -177,8 +195,25 @@ public class PhotosController {
 	}
 	
 	
+	//Album Menu Methods
+	public void createAlbum() {
+		
+		
+	}
 	
+	public void renameAlbum() {
+		
+		
+	}
 	
+	public void deleteAlbum() {
+		
+		
+	}
+	
+	public void openAlbum() {
+		
+	}
 	
 	
 	

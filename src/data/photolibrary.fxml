@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="data.PhotosController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="data.PhotosController">
    <children>
-      <TilePane fx:id="imageDisplay" layoutY="100.0" prefHeight="300.0" prefWidth="389.0" style="-fx-background-color: gray;">
+      <TilePane fx:id="imageDisplay" layoutX="-1.0" layoutY="118.0" prefHeight="312.0" prefWidth="393.0" style="-fx-background-color: gray;">
          <children>
             <Label alignment="TOP_RIGHT" text="image display (tile pane)">
                <font>
@@ -23,7 +23,7 @@
             </Label>
          </children>
       </TilePane>
-      <MenuButton fx:id="userMenu" alignment="CENTER_RIGHT" layoutX="456.0" layoutY="21.0" mnemonicParsing="false" onDragOver="#displayMenu" text="User Settings" AnchorPane.topAnchor="21.0">
+      <MenuButton fx:id="userMenu" alignment="CENTER_RIGHT" layoutX="441.0" layoutY="19.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="128.0" text="User Settings" AnchorPane.topAnchor="19.0">
         <items>
           <MenuItem fx:id="yourAccount" mnemonicParsing="false" onAction="#displayUserInfo" text="Your Account" />
           <MenuItem fx:id="adminControls" disable="true" mnemonicParsing="false" onAction="#giveAdminControl" text="Admin Controls" />
@@ -31,15 +31,15 @@
             <MenuItem fx:id="quitApp" mnemonicParsing="false" onAction="#quitApplication" text="Quit Application" />
         </items>
       </MenuButton>
-      <Label layoutX="197.0" layoutY="11.0" text="Photo Library">
+      <Label layoutX="197.0" layoutY="9.0" text="Photo Library">
          <font>
             <Font name="Futura Medium" size="34.0" />
          </font>
       </Label>
-      <TextField fx:id="searchTextField" layoutX="67.0" layoutY="64.0" prefHeight="27.0" prefWidth="233.0" promptText="Search Library" />
-      <Button fx:id="searchButt" layoutX="328.0" layoutY="64.0" mnemonicParsing="false" onAction="#searchLibrary" text="Search" />
-      <Button fx:id="cancelButt" layoutX="395.0" layoutY="64.0" mnemonicParsing="false" onAction="#clearSearchField" text="Cancel" />
-      <VBox fx:id="photoDisplay" layoutX="389.0" layoutY="100.0" prefHeight="300.0" prefWidth="212.0" style="-fx-background-color: white;">
+      <TextField fx:id="searchTextField" layoutX="158.0" layoutY="71.0" prefHeight="27.0" prefWidth="278.0" promptText="Search Library" />
+      <Button fx:id="searchButt" layoutX="444.0" layoutY="71.0" mnemonicParsing="false" onAction="#searchLibrary" text="Search" />
+      <Button fx:id="cancelButt" layoutX="511.0" layoutY="71.0" mnemonicParsing="false" onAction="#clearSearchField" text="Cancel" />
+      <VBox fx:id="photoDisplay" layoutX="392.0" layoutY="118.0" prefHeight="312.0" prefWidth="206.0" style="-fx-background-color: white;">
          <children>
             <Label alignment="TOP_RIGHT" text="Photo Details">
                <font>
@@ -48,5 +48,13 @@
             </Label>
          </children>
       </VBox>
+      <MenuButton fx:id="albumOptions" layoutX="14.0" layoutY="71.0" mnemonicParsing="false" text="Album Options">
+        <items>
+          <MenuItem fx:id="createOption" mnemonicParsing="false" onAction="#createAlbum" text="Create New Album" />
+          <MenuItem fx:id="renameOption" mnemonicParsing="false" onAction="#renameAlbum" text="Rename Album" />
+            <MenuItem fx:id="deleteOption" mnemonicParsing="false" onAction="#deleteAlbum" text="Delete Album" />
+            <MenuItem fx:id="openOption" mnemonicParsing="false" onAction="#openAlbum" text="Open Album" />
+        </items>
+      </MenuButton>
    </children>
 </AnchorPane>
