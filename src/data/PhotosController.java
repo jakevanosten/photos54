@@ -12,9 +12,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+
+import java.io.FileInputStream;
+
 
 
 /*
@@ -36,6 +40,7 @@ public class PhotosController {
 	@FXML Button newUserButt;
 	@FXML TextField loginField;
 	@FXML TextField newField;
+	@FXML MenuButton  userButton;
 
 	public void start(Stage primaryStage) {
 		// TODO Auto-generated method stub

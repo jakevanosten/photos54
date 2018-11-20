@@ -1,10 +1,15 @@
 package data;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
  import javafx.stage.Stage;
 
@@ -22,7 +27,23 @@ public class PhotoLib extends Application {
 		PhotosController libraryController = loader.getController();
 		libraryController.start(primaryStage);
 		
+		
+	
+		MenuItem yourAccount = new MenuItem("Your Account");
+        MenuItem adminControls = new MenuItem("Admin Controls");
+        MenuItem logout = new MenuItem("Logout");
+        MenuItem quitApp = new MenuItem("Quit Application");
+	
+        //FileInputStream input = new FileInputStream("resources/images/iconmonstr-menu-5-32.png");
+        //Image image = new Image(input);
+        //ImageView imageView = new ImageView(image);
+        //MenuButton userButton = new MenuButton("User Settings", imageView, yourAccount, adminControls, logout, quitApp);
+        
+        MenuButton userButton = new MenuButton("User Settings", null, yourAccount, adminControls, logout, quitApp);
+        
+        
 		Scene scene = new Scene(root);
+		root.getChildren().addAll(userButton);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Photo Library Login");  
 		primaryStage.show();
