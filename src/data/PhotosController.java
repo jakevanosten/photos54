@@ -9,12 +9,19 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.control.Alert.AlertType;
 
 import java.io.FileInputStream;
@@ -42,12 +49,34 @@ public class PhotosController {
 	@FXML TextField newField;
 	@FXML MenuButton  userButton;
 	@FXML TextField searchTextField;
-
+	@FXML TilePane imageDisplay;
+	
 	public void start(Stage primaryStage) {
-		// TODO Auto-generated method stub
+			String path = "C:\\Users\\jakev\\OneDrive\\Documents\\photos54\\src\\data\\Images\\stock\\";
+			
+			File folder = new File(path);
+			File[] fileList = folder.listFiles();
+
+			for (File file : fileList) {
+        		final Image image = new Image("File:stock/dolphins.jpg");
+                imageDisplay.getChildren().addAll(new ImageView(image));
+			}
 		
 	}
 	
+	private ImageView createImageView(final File imageFile) {
+        // DEFAULT_THUMBNAIL_WIDTH is a constant you need to define
+        // The last two arguments are: preserveRatio, and use smooth (slower)
+        // resizing
+
+        ImageView imageView = null;
+        final Image image = new Image("File:" + imageFile, 150, 0, true, true);
+		imageView = new ImageView(image);
+		imageView.setFitWidth(150);
+        
+        return imageView;
+    }
+
 	public void signin(ActionEvent e) throws FileNotFoundException {
 		if (loginField.getText().isEmpty()) {
 			emptyFieldAlert();
@@ -140,7 +169,7 @@ public class PhotosController {
 	
 	public void displayStock(){
 		
-		if(loginField.getText().equals("stock"){
+		if(loginField.getText().equals("stock")){
 			
 		}
 		

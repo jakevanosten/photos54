@@ -16,11 +16,6 @@
    <children>
       <TilePane fx:id="imageDisplay" layoutX="-1.0" layoutY="118.0" prefHeight="312.0" prefWidth="393.0" style="-fx-background-color: gray;">
          <children>
-            <Label alignment="TOP_RIGHT" text="image display (tile pane)">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
          </children>
       </TilePane>
       <MenuButton fx:id="userMenu" alignment="CENTER_RIGHT" layoutX="441.0" layoutY="19.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="128.0" text="User Settings" AnchorPane.topAnchor="19.0">
