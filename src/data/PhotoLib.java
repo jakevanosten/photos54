@@ -17,7 +17,7 @@ public class PhotoLib extends Application {
 		/*---- Loading in FXML and starting up the scene ----*/
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("login.fxml"));
-		AnchorPane root = loader.load();
+		AnchorPane root = (AnchorPane) loader.load();
 		
 		PhotosController libraryController = loader.getController();
 		libraryController.start(primaryStage);
@@ -28,6 +28,7 @@ public class PhotoLib extends Application {
 		primaryStage.show();
 		
 	}
+	
 	public void changeScene(String fxml,Stage primaryStage) throws IOException{
 	    Parent pane = FXMLLoader.load(
 	           getClass().getResource(fxml));

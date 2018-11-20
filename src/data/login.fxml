@@ -28,8 +28,8 @@
                               <Font name="System Bold" size="45.0" />
                            </font>
                         </Text>
-                        <TextField prefHeight="38.0" prefWidth="190.0" promptText="Username" />
-                        <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Sign-In" textAlignment="CENTER" />
+                        <TextField fx:id="loginField" prefHeight="38.0" prefWidth="190.0" promptText="Username" />
+                        <Button fx:id="signinButt" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#signin" text="Sign-In" textAlignment="CENTER" />
                      </children>
                   </VBox>
                </children>
@@ -43,8 +43,8 @@
                               <Font name="System Bold" size="45.0" />
                            </font>
                         </Text>
-                        <TextField prefHeight="37.0" prefWidth="297.0" promptText="Username" />
-                        <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Create User" textAlignment="CENTER" />
+                        <TextField fx:id="newField" prefHeight="37.0" prefWidth="297.0" promptText="Username" />
+                        <Button fx:id="newUserButt" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#newuser" text="Create User" textAlignment="CENTER" />
                      </children>
                   </VBox>
                </children></AnchorPane>
