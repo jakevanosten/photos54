@@ -15,14 +15,24 @@ import javafx.scene.layout.AnchorPane;
 
 
 public class PhotoLib extends Application {
+	
+	static Stage window;
+	static Scene libScene;
+	
 	@Override
 	public void start(Stage primaryStage) 
 	throws IOException {
-		
+		window = primaryStage;
 		/*---- Loading in FXML and starting up the scene ----*/
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
+		
+		FXMLLoader loader2 = new FXMLLoader();
+		loader2.setLocation(getClass().getResource("photolibrary.fxml"));
+		AnchorPane root2 = (AnchorPane) loader2.load();
+		
+		libScene = new Scene(root2);
 		
 		PhotosController libraryController = loader.getController();
 		libraryController.start(primaryStage);

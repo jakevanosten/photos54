@@ -59,8 +59,8 @@ public class PhotosController {
 				Scanner fileScan = new Scanner(savedUsers).useDelimiter("\n");
 				while(fileScan.hasNext()) {
 					if(loginField.getText().equals(fileScan.next())) { //username matches one in saved list
-						//switch stages and open up previously uploaded pictures
-						System.out.println("User was found");
+						Stage nextWindow = PhotoLib.window;
+						nextWindow.setScene(PhotoLib.libScene);
 						return;
 					}
 				}
@@ -87,6 +87,8 @@ public class PhotosController {
 				}
 				System.out.println("Created account!");
 				addUser(newField.getText());
+				Stage nextWindow = PhotoLib.window;
+				nextWindow.setScene(PhotoLib.libScene);
 				//now have to add name to userList, switch stages and open up new library
 		}
 	}
@@ -128,9 +130,29 @@ public class PhotosController {
 	}
 	
 	
+	public void displayMenu() {
+		
+		
+	}
+	
+	public void displayUserInfo() {
+		
+		
+	}
+	
+	public void giveAdminControl() {
+		
+		
+	}
+	
+	public void logout() {
+		
+		
+	}
+	public void quitApplication() {
 	
 	
-	
+	}
 	
 	//Search Field Methods
 	public void clearSearchField() {
