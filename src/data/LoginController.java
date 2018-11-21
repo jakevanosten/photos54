@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -40,42 +41,20 @@ import java.io.FileInputStream;
  */
 
 
-public class PhotosController {
+public class LoginController {
 
 	
 	@FXML Button signinButt;
 	@FXML Button newUserButt;
 	@FXML TextField loginField;
 	@FXML TextField newField;
-	@FXML MenuButton  userButton;
-	@FXML TextField searchTextField;
-	@FXML TilePane imageDisplay;
+	
+	Stage primaryStage;
 	
 	public void start(Stage primaryStage) {
-			String path = "C:\\Users\\jakev\\OneDrive\\Documents\\photos54\\src\\data\\Images\\stock\\";
-			
-			File folder = new File(path);
-			File[] fileList = folder.listFiles();
-
-			for (File file : fileList) {
-        		final Image image = new Image("File:stock/dolphins.jpg");
-                imageDisplay.getChildren().addAll(new ImageView(image));
-			}
-		
+		this.primaryStage = primaryStage;
 	}
 	
-	private ImageView createImageView(final File imageFile) {
-        // DEFAULT_THUMBNAIL_WIDTH is a constant you need to define
-        // The last two arguments are: preserveRatio, and use smooth (slower)
-        // resizing
-
-        ImageView imageView = null;
-        final Image image = new Image("File:" + imageFile, 150, 0, true, true);
-		imageView = new ImageView(image);
-		imageView.setFitWidth(150);
-        
-        return imageView;
-    }
 
 	public void signin(ActionEvent e) throws FileNotFoundException {
 		if (loginField.getText().isEmpty()) {
@@ -90,6 +69,8 @@ public class PhotosController {
 					if(loginField.getText().equals(fileScan.next())) { //username matches one in saved list
 						Stage nextWindow = PhotoLib.window;
 						nextWindow.setScene(PhotoLib.libScene);
+						PhotoLib.libController.start(primaryStage);
+
 						return;
 					}
 				}
@@ -114,10 +95,10 @@ public class PhotosController {
 						return;
 					}
 				}
-				System.out.println("Created account!");
 				addUser(newField.getText());
 				Stage nextWindow = PhotoLib.window;
 				nextWindow.setScene(PhotoLib.libScene);
+				PhotoLib.libController.start(primaryStage);
 				//now have to add name to userList, switch stages and open up new library
 		}
 	}
@@ -157,93 +138,6 @@ public class PhotosController {
 		      alert.setHeaderText("Please type in a valid username.");
 		      alert.showAndWait();
 	}
-	
-	private void emptySearchFieldAlert() {
-		Alert alert = 
-		         new Alert(AlertType.INFORMATION);
-		      alert.setTitle("Error - Empty Field");
-		      alert.setHeaderText("Please type in a valid search field.");
-		      alert.showAndWait();
-	}
-	
-	
-	public void displayStock(){
-		
-		if(loginField.getText().equals("stock")){
-			
-		}
-		
-		
-		
-	}
-	
-	public void displayMenu() {
-		
-		
-	}
-	
-	public void displayUserInfo() {
-		
-		
-	}
-	
-	public void giveAdminControl() {
-		
-		
-	}
-	
-	public void logout() {
-		
-		
-	}
-	public void quitApplication() {
-	
-	
-	}
-	
-	//Search Field Methods
-	public void clearSearchField() {
-		searchTextField.clear();
-	}
-	
-	public void searchLibrary(ActionEvent e){
-		String searchInput;
-		
-		if (searchTextField.getText().isEmpty()) {
-			emptySearchFieldAlert();
-		}else {
-			searchInput = searchTextField.getText();
-			
-			//compare to items with date range
-			
-			//compare to items with same tag
-			
-				
-			
-		}
-	}
-	
-	
-	//Album Menu Methods
-	public void createAlbum() {
-		
-		
-	}
-	
-	public void renameAlbum() {
-		
-		
-	}
-	
-	public void deleteAlbum() {
-		
-		
-	}
-	
-	public void openAlbum() {
-		
-	}
-	
 	
 	
 }

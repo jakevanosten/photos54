@@ -28,9 +28,9 @@ public class PhotoLib extends Application {
 	static Stage window;
 	static Scene libScene;
 	static TilePane tilePane;
-	
-	
-	
+	static Scene loginScene;
+	static LibController libController;
+	static LoginController loginController;
 	
 	@Override
 	public void start(Stage primaryStage) 
@@ -45,6 +45,7 @@ public class PhotoLib extends Application {
 		loader2.setLocation(getClass().getResource("photolibrary.fxml"));
 		AnchorPane root2 = (AnchorPane) loader2.load();
 		
+		loginScene = new Scene(root);
 		libScene = new Scene(root2);
 		
 		
@@ -54,13 +55,14 @@ public class PhotoLib extends Application {
 		
 	
 		
-		PhotosController libraryController = loader.getController();
-		libraryController.start(primaryStage);
+		loginController = loader.getController();
+		libController = loader2.getController();
+		
+		loginController.start(primaryStage);
 		
 		
-		Scene scene = new Scene(root);
 
-		primaryStage.setScene(scene);
+		primaryStage.setScene(loginScene);
 		primaryStage.setTitle("Photo Library");  
 		primaryStage.show();
 		
