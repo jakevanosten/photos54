@@ -4,11 +4,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
+
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Button;
@@ -28,7 +36,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.io.IOException;
 
 public class LibController {
 
@@ -37,8 +52,14 @@ public class LibController {
 	Photo selectedPhoto;
 	String newType = "";
 	String newContent = "";
-	
+	private static final String directory = "data";
+	private static final String filename = "photoLib";
+	File[] fileList;
 	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
+	private TextArea txtArea;
+	private Text actionStatus;
+	private static final String defaultFileName = "temporary.jpg";
+	private Stage savedStage;
 	
 	@FXML MenuItem logoutButt;
 	@FXML MenuButton  userButton;
@@ -62,10 +83,12 @@ public class LibController {
 	@FXML TextField displayCap;
 	@FXML Button prevButt;
 	@FXML Button nextButt;
+	@FXML MenuItem createOption;
+	@FXML MenuItem renameOption;
+	@FXML MenuItem deleteOption;
+	@FXML MenuItem openOption;
 	
-	public LibController(){
-		
-	}
+
 	
 	
 	public void initialize() {
@@ -73,28 +96,34 @@ public class LibController {
 		imageDisplay.setVgap(10);
 		displayCap.setDisable(true);
 		
-        String path = "src/data/Images/stock/";
+        //if(user.equals("stock")){
+        	String path = "src/data/Images/stock/";
 		
-		File folder = new File(path);
-		File[] fileList = folder.listFiles();
-		for (File file : fileList) {
-			final Image image = new Image(file.toURI().toString(), 150,0,true,true);
-			Photo newPhoto = new Photo(file.getName(),image,new GregorianCalendar(), FXCollections.observableArrayList());
-			obsList.add(newPhoto);
-			ImageView iv = new ImageView(image);
-			iv.setImage(image);
-			iv.setFitWidth(150); 
-	    	imageDisplay.getChildren().add(iv);
-	    	iv.setOnMouseClicked(event -> {
-	    		captionField.setText(newPhoto.getCaption());
-	    		dateField.setText(newPhoto.getDate());
-	    		displayTags(newPhoto);
-	    		selectedPhoto = newPhoto;
-	    		addTagButt.setDisable(false);
-	    		deleteTagButt.setDisable(false);
-	    		deletePhotoButt.setDisable(false);
-	    	});
-		}
+        	File folder = new File(path);
+        	File[] fileList = folder.listFiles();
+        	for (File file : fileList) {
+        		final Image image = new Image(file.toURI().toString(), 150,0,true,true);
+        		Photo newPhoto = new Photo(file.getName(),image,new GregorianCalendar(), FXCollections.observableArrayList());
+        		obsList.add(newPhoto);
+        		ImageView iv = new ImageView(image);
+        		iv.setImage(image);
+        		iv.setFitWidth(150); 
+        		imageDisplay.getChildren().add(iv);
+	    	
+        		iv.setOnMouseClicked(event -> {
+        			captionField.setText(newPhoto.getCaption());
+        			dateField.setText(newPhoto.getDate());
+        			displayTags(newPhoto);
+        			selectedPhoto = newPhoto;
+        			addTagButt.setDisable(false);
+        			deleteTagButt.setDisable(false);
+        			deletePhotoButt.setDisable(false);
+        		});
+        	}
+		
+		
+		
+	
 		
 		
     }
@@ -220,10 +249,86 @@ public class LibController {
 	    } 
 	}
 	
+	private class SaveButtonListener implements EventHandler<ActionEvent> {
 
+		@Override
+		public void handle(ActionEvent e) {
+
+			showSaveFileChooser();
+		}
+	}
+	
+	
+
+	
+	private void showSaveFileChooser() {
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save file");
+		fileChooser.setInitialFileName(defaultFileName);
+		File savedFile = fileChooser.showSaveDialog(savedStage);
+
+		if (savedFile != null) {
+
+			try {
+				saveFileRoutine(savedFile);
+			}
+			catch(IOException e) {
+			
+				e.printStackTrace();
+				actionStatus.setText("An ERROR occurred while saving the file!" +
+						savedFile.toString());
+				return;
+			}
+			
+			actionStatus.setText("File saved: " + savedFile.toString());
+		}
+		else {
+			actionStatus.setText("File save cancelled.");
+		}
+	}
+	
+	private void saveFileRoutine(File file)
+			throws IOException{
+		// Creates a new file and writes the txtArea contents into it
+		String txt = txtArea.getText();
+		file.createNewFile();
+		FileWriter writer = new FileWriter(file);
+		writer.write(txt);
+		writer.close();
+	}
+	
 	public void addPhoto(ActionEvent e) {
+		FileChooser fileChooser = new FileChooser();
+		File dir = new File(user);
+		dir.mkdir();
 	
+		fileChooser.setTitle("Select Photo File");
+		fileChooser.setInitialDirectory(dir);
+		
+		FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+		fileChooser.setInitialFileName("temp");
+		
+		File selectedFile = fileChooser.showOpenDialog(null);
+		File savedFile = fileChooser.showSaveDialog(primaryStage);
 	
+		if(savedFile != null){
+			try{
+				saveFileRoutine(savedFile);
+			}catch(IOException ex){
+				
+				ex.printStackTrace();
+				
+			}
+		}
+	
+		/*
+		if(selectedFile != null){
+			Dialog.setText("File selected: " + selectedFile.getName());
+		}
+		*/
 	}
 	
 	public void deletePhoto(ActionEvent e) {
@@ -305,10 +410,31 @@ public class LibController {
 	}
 	
 	
-	public void quitApplication() {
+	public void quitApplication(ActionEvent e) {
 		//saves files to disk before closing out the stage
 	
-	}
+			File file = new File(directory);
+			
+			if (!file.exists())
+			{	
+				file.mkdir();
+			}
+			
+			try{
+				FileOutputStream outputDir = new FileOutputStream(directory + File.separator + filename);
+				ObjectOutputStream output = new ObjectOutputStream(outputDir);
+				output.writeObject(fileList);
+				output.close();
+				outputDir.close();
+				System.out.println("Saved Photo Library.");
+				
+				Platform.exit();
+				
+			}catch(IOException ex){
+				ex.printStackTrace();
+			}
+			
+	}	
 	
 	//Search Field Methods
 	public void clearSearchField() {
@@ -334,10 +460,36 @@ public class LibController {
 	
 	
 	//Album Menu Methods
-	public void createAlbum() {
-		
-		
+	public void createAlbum(ActionEvent e) {
+		/*
+		ArrayList<Photo> photoAlbum 
+		//Album newAlbum = new Album()
+				String item = "Create New Album";
+				TextInputDialog dialog = new TextInputDialog(item);
+				 dialog.setContentText("Enter Album Name: ");
+				 Optional<String> result = dialog.showAndWait();
+				 String x = result.get();
+				 //ArrayList<Photos> (result.get()) = new ArrayList();
+				 
+				 if (result.isPresent()) { obsList.addAll(e); }
+	*/
 	}
+	
+	/*
+	private void showItemInputDialog(Stage mainStage) {
+		 String item = listView.getSelectionModel().getSelectedItem();
+		 int index = listView.getSelectionModel().getSelectedIndex();
+		 
+		 dialog.initOwner(mainStage); dialog.setTitle("List Item");
+		 dialog.setHeaderText("Selected Item (Index: " + index + ")");
+		 dialog.setContentText("Enter name: ");
+		 Optional<String> result = dialog.showAndWait();
+		 if (result.isPresent()) { obsList.set(index, result.get()); }
+	
+	}
+	*/	
+	
+	
 	
 	public void renameAlbum() {
 		

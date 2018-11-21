@@ -3,16 +3,33 @@ package data;
 	import java.io.Serializable;
 	import java.util.ArrayList;
 	import java.util.Collections;
+	import java.util.*;
+
+import javafx.beans.InvalidationListener;
+import javafx.collections.ArrayChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.image.*;
 
 	/**
 	 * The Class Album.
 	 */
-	public class Album implements Serializable {
+	public class Album  {
+		
+		/*
+		private static List <Photo> photoData = new ArrayList<>();
+		
+		ObservableList<Photo> observableList = FXCollections.observableArrayList(photoData);
+		
+		public ObservableList<Photo> getList(){
+			return observableList;
+		}
+		*/
 		
 		/**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
+		//private static final long serialVersionUID = 1L;
 
 		/** The name. */
 		public String name;
@@ -106,5 +123,9 @@ package data;
 		public String toString(){
 			return name;
 		}
+		
+		
+
+		
 	}
 

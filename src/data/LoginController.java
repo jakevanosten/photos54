@@ -56,9 +56,6 @@ public class LoginController {
 		this.primaryStage = primaryStage;
 	}
 	
-	public LoginController(){
-		
-	}
 	
 
 	public void signin(ActionEvent e) throws FileNotFoundException {
@@ -90,6 +87,7 @@ public class LoginController {
 			emptyFieldAlert();
 		}else {
 			//have to check if username is in userList.txt, if it is the changestage to library, if isnt then  
+				//ArrayList<User> useRList = 
 				File savedUsers = new File("userList.txt");
 			
 				@SuppressWarnings("resource")
@@ -107,6 +105,7 @@ public class LoginController {
 				nextWindow.setScene(Photos.libScene);
 				Photos.libController.start(primaryStage);
 				//now have to add name to userList, switch stages and open up new library
+				
 		}
 	}
 	
