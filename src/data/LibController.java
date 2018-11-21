@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,12 +30,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
-
 public class LibController {
 
 	Stage primaryStage;
 	String user;
 	Photo selectedPhoto;
+	String newType = "";
+	String newContent = "";
+	
 	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
 	
 	@FXML MenuItem logoutButt;
@@ -43,7 +47,6 @@ public class LibController {
 	@FXML MenuItem adminControls;
 	@FXML TextField captionField;
 	@FXML TextField dateField;
-	@FXML MenuItem editCapButt;
 	@FXML MenuItem addTagButt;
 	@FXML MenuItem deleteTagButt;
 	@FXML MenuItem deletePhotoButt;
@@ -52,6 +55,8 @@ public class LibController {
 	@FXML TableView<Tag> tagTable;
 	@FXML TableColumn<Tag, String> typeCol;
 	@FXML TableColumn<Tag, String> contentCol;
+	@FXML TextField editTypeField;
+	@FXML TextField editContentField;
 	
 	public void initialize() {
 		imageDisplay.setHgap(10);
@@ -72,8 +77,11 @@ public class LibController {
 	    	iv.setOnMouseClicked(event -> {
 	    		captionField.setText(newPhoto.getCaption());
 	    		dateField.setText(newPhoto.getDate());
-	    		displayTags(iv, newPhoto);
+	    		displayTags(newPhoto);
 	    		selectedPhoto = newPhoto;
+	    		addTagButt.setDisable(false);
+	    		deleteTagButt.setDisable(false);
+	    		deletePhotoButt.setDisable(false);
 	    	});
 		}
 		
@@ -87,20 +95,40 @@ public class LibController {
 			adminControls.setDisable(false);
 		}
 		
-		PropertyValueFactory<Tag, String> tagTypeProperty = 
-		          new PropertyValueFactory<Tag, String>("tagType");
-		PropertyValueFactory<Tag, String> tagContentProperty = 
-		          new PropertyValueFactory<Tag, String>("tagContent");
-		
-		typeCol.setCellValueFactory(tagTypeProperty);
-	    contentCol.setCellValueFactory(tagContentProperty);
 	}
 	
-	private void displayTags(ImageView iv, Photo newPhoto) {
-		ObservableList<Tag> tagList = newPhoto.getTags();
+	private SimpleStringProperty tagTypeProperty = new SimpleStringProperty();
+	private SimpleStringProperty tagContentProperty = new SimpleStringProperty();
+	
+    public void setTagType(String tagType) {
+        this.tagTypeProperty.set(tagType);
+    }
+    
+    public String getTagType() {
+        return tagTypeProperty.getValue();
+    }
+    
+    public SimpleStringProperty typeProperty() {
+	    return this.tagTypeProperty;
+	}
+    
+    public void setTagContent(String tagContent) {
+        this.tagContentProperty.set(tagContent);
+    }
+
+    public String getTagContent() {
+        return tagContentProperty.getValue();
+    }
+    
+    public SimpleStringProperty contentProperty() {
+        return this.tagContentProperty;
+    }
+	
+    
+	private void displayTags(Photo newPhoto) {
+		ObservableList<Tag> tagList = newPhoto.tags;
 		tagTable.setItems(tagList);
 	}
-
 	
 	public void editCaption(MouseEvent e) {
         if(e.getButton().equals(MouseButton.PRIMARY)){
@@ -120,11 +148,56 @@ public class LibController {
     }
 	
 	public void addTag(ActionEvent e) {
-		
+		newType = editTypeField.getText();
+		newContent = editContentField.getText();
+		if(newType.equals("") || newContent.equals("")){
+			blankTagAlert();
+		}
+		Tag newTag = new Tag(newType, newContent);
+		for(Tag t : selectedPhoto.getTags()) {
+			if(newTag.equals(t)) {
+				redundantTagAlert();
+				editTypeField.clear();
+				editContentField.clear();
+				return;
+			}
+		}
+		selectedPhoto.getTags().add(newTag);
+		editTypeField.clear();
+		editContentField.clear();
+	}
+	
+	private void redundantTagAlert() {
+		Alert alert = 
+		         new Alert(AlertType.INFORMATION);
+		      alert.setTitle("Error - Tag Already Exists");
+		      alert.setHeaderText("Please type in a new tag.");
+		      alert.showAndWait();	
+	}
+	
+	private void blankTagAlert() {
+		Alert alert = 
+		         new Alert(AlertType.INFORMATION);
+		      alert.setTitle("Error - No tag present");
+		      alert.setHeaderText("Please type in new tag type AND content before trying to add.");
+		      alert.showAndWait();		
 	}
 	
 	public void deleteTag(ActionEvent e) {
-		
+		Tag selectedTag = tagTable.getSelectionModel().getSelectedItem();
+		ObservableList<Tag> tagList = selectedPhoto.getTags();
+	    int index = tagList.indexOf(selectedTag);
+	    
+	    if(tagList.size() == 1) {
+	    	tagList.remove(selectedTag);
+	    }
+	    else if(tagList.size() > index+1) { //can select row after deleted
+	    	tagTable.getSelectionModel().clearAndSelect(index+1);
+	    	tagList.remove(selectedTag);
+	    }else{
+	    	tagTable.getSelectionModel().clearAndSelect(index-11);
+	    	tagList.remove(selectedTag);
+	    } 
 	}
 	
 

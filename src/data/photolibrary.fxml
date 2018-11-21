@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -44,9 +45,9 @@
             <Font name="Futura Medium" size="34.0" />
          </font>
       </Label>
-      <TextField fx:id="searchTextField" layoutX="158.0" layoutY="71.0" prefHeight="27.0" prefWidth="278.0" promptText="Search Library" />
-      <Button fx:id="searchButt" layoutX="444.0" layoutY="71.0" mnemonicParsing="false" onAction="#searchLibrary" text="Search" />
-      <Button fx:id="cancelButt" layoutX="511.0" layoutY="71.0" mnemonicParsing="false" onAction="#clearSearchField" text="Cancel" />
+      <TextField fx:id="searchTextField" layoutX="158.0" layoutY="71.0" prefHeight="27.0" prefWidth="261.0" promptText="Search Library" />
+      <Button fx:id="searchButt" layoutX="426.0" layoutY="71.0" mnemonicParsing="false" onAction="#searchLibrary" text="Search" />
+      <Button fx:id="cancelButt" layoutX="484.0" layoutY="71.0" mnemonicParsing="false" onAction="#clearSearchField" text="Cancel" />
       <GridPane layoutX="538.0" layoutY="129.0" prefHeight="427.0" prefWidth="310.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.199951171875" minWidth="10.0" prefWidth="67.20001220703125" />
@@ -81,8 +82,16 @@
             <HBox prefHeight="105.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TableView fx:id="tagTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
               <columns>
-                <TableColumn fx:id="typeCol" editable="false" prefWidth="120.80005186796188" resizable = "false" text="Type" />
-                <TableColumn fx:id="contentCol" editable="false" prefWidth="121.5999755859375" resizable="false" text="Content" />
+                <TableColumn fx:id="typeCol" prefWidth="120.80005186796188" resizable="false" text="Type">
+                	<cellValueFactory>
+        				<PropertyValueFactory property="type" />
+    				</cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="contentCol" prefWidth="121.5999755859375" resizable="false" text="Content">
+ 					<cellValueFactory>
+        				<PropertyValueFactory property="content" />
+    				</cellValueFactory>               
+                </TableColumn>
               </columns>
             </TableView>
          </children>
@@ -95,19 +104,20 @@
             <MenuItem fx:id="openOption" mnemonicParsing="false" onAction="#openAlbum" text="Open Album" />
         </items>
       </MenuButton>
-      <Label alignment="TOP_RIGHT" layoutX="620.0" layoutY="101.0" lineSpacing="10.0" text="Photo Details" underline="true">
+      <Label alignment="TOP_RIGHT" layoutX="623.0" layoutY="118.0" lineSpacing="10.0" text="Photo Details" underline="true">
          <font>
             <Font name="Bookshelf Symbol 7" size="21.0" />
          </font>
       </Label>
-      <MenuButton fx:id="userMenu1" alignment="CENTER_RIGHT" layoutX="568.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="128.0" text="Photo Options">
+      <MenuButton fx:id="userMenu1" alignment="CENTER_RIGHT" layoutX="547.0" layoutY="20.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="149.0" text="Photo Options">
          <items>
-            <MenuItem fx:id="editCapButt" disable="true" mnemonicParsing="false" onAction="#editCaption" text="Edit Caption" />
             <MenuItem fx:id="addTagButt" disable="true" mnemonicParsing="false" onAction="#addTag" text="Add Tag" />
             <MenuItem fx:id="deleteTagButt" disable="true" mnemonicParsing="false" onAction="#deleteTag" text="Delete Tag" />
             <MenuItem fx:id="deletePhotoButt" disable="true" mnemonicParsing="false" onAction="#deletePhoto" text="Delete Photo" />
             <MenuItem fx:id="addPhotoButt" mnemonicParsing="false" onAction="#addPhoto" text="Add Photo" />
          </items>
       </MenuButton>
+      <TextField fx:id="editTypeField" layoutX="558.0" layoutY="71.0" prefHeight="26.0" prefWidth="128.0" promptText="New Tag Type" />
+      <TextField fx:id="editContentField" layoutX="693.0" layoutY="71.0" prefHeight="26.0" prefWidth="150.0" promptText="New Tag Content" />
    </children>
 </AnchorPane>

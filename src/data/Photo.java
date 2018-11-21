@@ -51,7 +51,9 @@ public class Photo {
 		return this.tags;
 	}
 	
-	public String printTags() {
-		return this.tags.toString();
+	public void printTags() {
+		for(Tag t : this.tags) {
+			System.out.println(t.type + "," + t.content);
+		}
 	}
 }
