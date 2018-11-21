@@ -1,4 +1,4 @@
-package data;
+package controller;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
+import model.Photos;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

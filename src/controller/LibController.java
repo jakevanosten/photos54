@@ -1,4 +1,4 @@
-package data;
+package controller;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,6 +39,10 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Photo;
+import model.Photos;
+import model.Tag;
+
 import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.awt.image.BufferedImage;
@@ -97,7 +101,7 @@ public class LibController {
 		displayCap.setDisable(true);
 		
         //if(user.equals("stock")){
-        	String path = "src/data/Images/stock/";
+        	String path = "src/Images/stock/";
 		
         	File folder = new File(path);
         	File[] fileList = folder.listFiles();

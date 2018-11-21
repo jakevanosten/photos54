@@ -1,4 +1,4 @@
-package data;
+package model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,10 +11,10 @@ import javafx.scene.image.Image;
 //contains information about photo object, which contains image as well as info and tags about image to use when clicked in library
 //going to be stored in photo array called album
 public class Photo {
-	String caption;
+	public String caption;
 	Image img;
 	Calendar cal;
-	ObservableList<Tag> tags; //set of tags that belong to the photo, in pairs. ("location","prague"),("person","jake") etc.
+	public ObservableList<Tag> tags; //set of tags that belong to the photo, in pairs. ("location","prague"),("person","jake") etc.
 	
 	
 	public Photo(String cap, Image img, Calendar cal, ObservableList<Tag> tags) {

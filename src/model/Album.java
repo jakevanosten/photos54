@@ -1,9 +1,9 @@
-package data;
+package model;
 
 	import java.io.Serializable;
 	import java.util.ArrayList;
 	import java.util.Collections;
-	import java.util.*;
+import java.util.*;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ArrayChangeListener;

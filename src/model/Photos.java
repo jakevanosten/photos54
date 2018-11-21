@@ -1,4 +1,4 @@
-package data;
+package model;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -6,6 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
+
+import controller.LibController;
+import controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -25,12 +28,12 @@ import javafx.stage.Stage;
 
 public class Photos extends Application {
 	
-	static Stage window;
-	static Scene libScene;
+	public static Stage window;
+	public static Scene libScene;
 	static TilePane tilePane;
-	static Scene loginScene;
-	static LibController libController;
-	static LoginController loginController;
+	public static Scene loginScene;
+	public static LibController libController;
+	public static LoginController loginController;
 	
 	@Override
 	public void start(Stage primaryStage) 
@@ -38,11 +41,11 @@ public class Photos extends Application {
 		window = primaryStage;
 		/*---- Loading in FXML and starting up the scene ----*/
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("login.fxml"));
+		loader.setLocation(getClass().getResource("/view/login.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
 		
 		FXMLLoader loader2 = new FXMLLoader();
-		loader2.setLocation(getClass().getResource("photolibrary.fxml"));
+		loader2.setLocation(getClass().getResource("/view/photolibrary.fxml"));
 		AnchorPane root2 = (AnchorPane) loader2.load();
 		
 		loginScene = new Scene(root);
