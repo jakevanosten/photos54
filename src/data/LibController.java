@@ -45,6 +45,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.io.IOException;
 
+
 public class LibController {
 
 	Stage primaryStage;
@@ -60,6 +61,7 @@ public class LibController {
 	private Text actionStatus;
 	private static final String defaultFileName = "temporary.jpg";
 	private Stage savedStage;
+	private ObservableList<Album> albumListView;
 	
 	@FXML MenuItem logoutButt;
 	@FXML MenuButton  userButton;
@@ -461,8 +463,9 @@ public class LibController {
 	
 	//Album Menu Methods
 	public void createAlbum(ActionEvent e) {
+		
 		/*
-		ArrayList<Photo> photoAlbum 
+		ArrayList<Photo> photoAlbum =
 		//Album newAlbum = new Album()
 				String item = "Create New Album";
 				TextInputDialog dialog = new TextInputDialog(item);
@@ -472,7 +475,10 @@ public class LibController {
 				 //ArrayList<Photos> (result.get()) = new ArrayList();
 				 
 				 if (result.isPresent()) { obsList.addAll(e); }
-	*/
+	
+				 */
+				Album.s	 
+				 
 	}
 	
 	/*

@@ -15,7 +15,8 @@ import javafx.scene.image.*;
 	 * The Class Album.
 	 */
 	public class Album  {
-		
+		private String album;
+		private String filename;
 		/*
 		private static List <Photo> photoData = new ArrayList<>();
 		
@@ -44,6 +45,10 @@ import javafx.scene.image.*;
 		 */
 		public ArrayList<Photo> getPhotos(){
 			return photos;
+		}
+		
+		public void setAlbum(String album){
+			this.album = album;
 		}
 		
 		/**
