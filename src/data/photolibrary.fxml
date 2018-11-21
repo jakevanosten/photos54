@@ -8,11 +8,13 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
@@ -29,7 +31,7 @@
             </TilePane>
          </content>
       </ScrollPane>
-      <MenuButton fx:id="userMenu" alignment="CENTER_RIGHT" layoutX="664.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="128.0" text="User Settings" AnchorPane.topAnchor="20.0">
+      <MenuButton fx:id="userMenu" alignment="CENTER_RIGHT" layoutX="709.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="128.0" text="User Settings" AnchorPane.topAnchor="20.0">
         <items>
           <MenuItem fx:id="yourAccount" mnemonicParsing="false" onAction="#displayUserInfo" text="Your Account" />
           <MenuItem fx:id="adminControls" disable="true" mnemonicParsing="false" text="Admin Controls" />
@@ -45,15 +47,17 @@
       <TextField fx:id="searchTextField" layoutX="158.0" layoutY="71.0" prefHeight="27.0" prefWidth="278.0" promptText="Search Library" />
       <Button fx:id="searchButt" layoutX="444.0" layoutY="71.0" mnemonicParsing="false" onAction="#searchLibrary" text="Search" />
       <Button fx:id="cancelButt" layoutX="511.0" layoutY="71.0" mnemonicParsing="false" onAction="#clearSearchField" text="Cancel" />
-      <GridPane layoutX="538.0" layoutY="129.0" prefHeight="426.0" prefWidth="310.0">
+      <GridPane layoutX="538.0" layoutY="129.0" prefHeight="427.0" prefWidth="310.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.199951171875" minWidth="10.0" prefWidth="79.20001220703125" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.39999999999998" minWidth="10.0" prefWidth="231.19998779296873" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.199951171875" minWidth="10.0" prefWidth="67.20001220703125" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.6000244140625" minWidth="10.0" prefWidth="243.99998779296874" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="95.7999755859375" minHeight="0.0" prefHeight="95.7999755859375" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="155.60001220703126" minHeight="0.0" prefHeight="72.6000244140625" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="317.6" minHeight="10.0" prefHeight="258.40000000000003" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="170.2" minHeight="0.0" prefHeight="102.99997558593748" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="317.6" minHeight="10.0" prefHeight="225.20001220703125" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="317.6" minHeight="0.0" prefHeight="1.9999877929687386" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="317.6" minHeight="0.0" prefHeight="7.400048828124966" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="317.6" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -72,9 +76,15 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <TextField fx:id="captionField" editable="false" GridPane.columnIndex="1" />
+            <TextField fx:id="captionField" editable="false" onMouseClicked="#editCaption" GridPane.columnIndex="1" />
             <TextField fx:id="dateField" editable="false" prefHeight="26.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextArea fx:id="tagField" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <HBox prefHeight="105.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TableView fx:id="tagTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <columns>
+                <TableColumn fx:id="typeCol" editable="false" prefWidth="120.80005186796188" resizable = "false" text="Type" />
+                <TableColumn fx:id="contentCol" editable="false" prefWidth="121.5999755859375" resizable="false" text="Content" />
+              </columns>
+            </TableView>
          </children>
       </GridPane>
       <MenuButton fx:id="albumOptions" layoutX="14.0" layoutY="71.0" mnemonicParsing="false" text="Album Options">
@@ -90,5 +100,14 @@
             <Font name="Bookshelf Symbol 7" size="21.0" />
          </font>
       </Label>
+      <MenuButton fx:id="userMenu1" alignment="CENTER_RIGHT" layoutX="568.0" layoutY="20.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="128.0" text="Photo Options">
+         <items>
+            <MenuItem fx:id="editCapButt" disable="true" mnemonicParsing="false" onAction="#editCaption" text="Edit Caption" />
+            <MenuItem fx:id="addTagButt" disable="true" mnemonicParsing="false" onAction="#addTag" text="Add Tag" />
+            <MenuItem fx:id="deleteTagButt" disable="true" mnemonicParsing="false" onAction="#deleteTag" text="Delete Tag" />
+            <MenuItem fx:id="deletePhotoButt" disable="true" mnemonicParsing="false" onAction="#deletePhoto" text="Delete Photo" />
+            <MenuItem fx:id="addPhotoButt" mnemonicParsing="false" onAction="#addPhoto" text="Add Photo" />
+         </items>
+      </MenuButton>
    </children>
 </AnchorPane>
