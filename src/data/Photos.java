@@ -23,7 +23,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 
-public class PhotoLib extends Application {
+public class Photos extends Application {
 	
 	static Stage window;
 	static Scene libScene;
@@ -109,16 +109,4 @@ public class PhotoLib extends Application {
 	    }
 	 
 	 */
-	 
-	public void changeScene(String fxml,Stage primaryStage) throws IOException{
-	    Parent pane = FXMLLoader.load(
-	           getClass().getResource(fxml));
-
-	   Scene scene = new Scene( pane );
-	   primaryStage.setScene(scene);
-	}
-	
-	public static void main(String[] args) {
-		launch(args);
-	}
 }

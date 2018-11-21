@@ -50,6 +50,7 @@ public class LoginController {
 	@FXML TextField newField;
 	
 	Stage primaryStage;
+	static String userName;
 	
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -67,10 +68,11 @@ public class LoginController {
 				Scanner fileScan = new Scanner(savedUsers).useDelimiter("\n");
 				while(fileScan.hasNext()) {
 					if(loginField.getText().equals(fileScan.next())) { //username matches one in saved list
-						Stage nextWindow = PhotoLib.window;
-						nextWindow.setScene(PhotoLib.libScene);
-						PhotoLib.libController.start(primaryStage);
-
+						userName = loginField.getText();
+						Stage nextWindow = Photos.window;
+						nextWindow.setScene(Photos.libScene);
+						Photos.libController.start(primaryStage);
+						
 						return;
 					}
 				}
@@ -96,9 +98,10 @@ public class LoginController {
 					}
 				}
 				addUser(newField.getText());
-				Stage nextWindow = PhotoLib.window;
-				nextWindow.setScene(PhotoLib.libScene);
-				PhotoLib.libController.start(primaryStage);
+				userName = loginField.getText();
+				Stage nextWindow = Photos.window;
+				nextWindow.setScene(Photos.libScene);
+				Photos.libController.start(primaryStage);
 				//now have to add name to userList, switch stages and open up new library
 		}
 	}
