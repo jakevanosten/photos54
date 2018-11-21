@@ -193,6 +193,7 @@ public class LibController {
 		newContent = editContentField.getText();
 		if(newType.equals("") || newContent.equals("")){
 			blankTagAlert();
+			return;
 		}
 		Tag newTag = new Tag(newType, newContent);
 		for(Tag t : selectedPhoto.getTags()) {

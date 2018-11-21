@@ -1,4 +1,1 @@
 stock
-jvo
-admin
-tiff
