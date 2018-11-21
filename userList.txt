@@ -1,1 +1,10 @@
+<<<<<<< HEAD
 stock
+=======
+stock
+jvo
+admin
+tiff
+
+
+>>>>>>> 9f44e0caead333d2244673dee3b67e74a0cf8f15
