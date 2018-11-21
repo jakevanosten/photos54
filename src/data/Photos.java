@@ -53,13 +53,14 @@ public class Photos extends Application {
 		tilePane = new TilePane();
 		
 		
-	
+		
 		
 		loginController = loader.getController();
 		libController = loader2.getController();
 		
-		loginController.start(primaryStage);
+		//loader.setController(new loginController(path));
 		
+		loginController.start(primaryStage);
 		
 
 		primaryStage.setScene(loginScene);
@@ -109,4 +110,9 @@ public class Photos extends Application {
 	    }
 	 
 	 */
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
 }

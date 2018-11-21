@@ -63,12 +63,17 @@ public class LibController {
 	@FXML Button prevButt;
 	@FXML Button nextButt;
 	
+	public LibController(){
+		
+	}
+	
+	
 	public void initialize() {
 		imageDisplay.setHgap(10);
 		imageDisplay.setVgap(10);
 		displayCap.setDisable(true);
 		
-        String path = "C:\\Users\\jakev\\OneDrive\\Documents\\photos54\\src\\data\\Images\\stock\\";
+        String path = "src/data/Images/stock/";
 		
 		File folder = new File(path);
 		File[] fileList = folder.listFiles();

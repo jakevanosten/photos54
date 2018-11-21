@@ -56,6 +56,10 @@ public class LoginController {
 		this.primaryStage = primaryStage;
 	}
 	
+	public LoginController(){
+		
+	}
+	
 
 	public void signin(ActionEvent e) throws FileNotFoundException {
 		if (loginField.getText().isEmpty()) {
