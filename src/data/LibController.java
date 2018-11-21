@@ -51,16 +51,22 @@ public class LibController {
 	@FXML MenuItem deleteTagButt;
 	@FXML MenuItem deletePhotoButt;
 	@FXML MenuItem addPhotoButt;
+	@FXML MenuItem displayButt;
 	@FXML Button saveEditButt;
 	@FXML TableView<Tag> tagTable;
 	@FXML TableColumn<Tag, String> typeCol;
 	@FXML TableColumn<Tag, String> contentCol;
 	@FXML TextField editTypeField;
 	@FXML TextField editContentField;
+	@FXML ImageView displayBox;
+	@FXML TextField displayCap;
+	@FXML Button prevButt;
+	@FXML Button nextButt;
 	
 	public void initialize() {
 		imageDisplay.setHgap(10);
 		imageDisplay.setVgap(10);
+		displayCap.setDisable(true);
 		
         String path = "C:\\Users\\jakev\\OneDrive\\Documents\\photos54\\src\\data\\Images\\stock\\";
 		
@@ -90,6 +96,7 @@ public class LibController {
 	
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
+		primaryStage.centerOnScreen();
 		user = LoginController.userName;
 		if(user.equals("admin")) {
 			adminControls.setDisable(false);
@@ -163,6 +170,8 @@ public class LibController {
 			}
 		}
 		selectedPhoto.getTags().add(newTag);
+		selectedPhoto.updateDate();
+		dateField.setText(selectedPhoto.getDate().toString());
 		editTypeField.clear();
 		editContentField.clear();
 	}
@@ -190,13 +199,19 @@ public class LibController {
 	    
 	    if(tagList.size() == 1) {
 	    	tagList.remove(selectedTag);
+	    	selectedPhoto.updateDate();
+   		 	dateField.setText(selectedPhoto.getDate().toString());
 	    }
 	    else if(tagList.size() > index+1) { //can select row after deleted
 	    	tagTable.getSelectionModel().clearAndSelect(index+1);
 	    	tagList.remove(selectedTag);
+	    	selectedPhoto.updateDate();
+   		 	dateField.setText(selectedPhoto.getDate().toString());
 	    }else{
 	    	tagTable.getSelectionModel().clearAndSelect(index-11);
 	    	tagList.remove(selectedTag);
+	    	selectedPhoto.updateDate();
+   		 	dateField.setText(selectedPhoto.getDate().toString());
 	    } 
 	}
 	
@@ -210,6 +225,55 @@ public class LibController {
 		
 	}
 	
+	public void displayPhoto(ActionEvent e) {
+		displayBox.setFitWidth(300);
+		displayBox.setFitHeight(400);
+		displayBox.setImage(selectedPhoto.getImage());
+		displayCap.setText(selectedPhoto.getCaption());
+		if(obsList.size() == 0){
+			noPhotosAlert();
+			return;
+		}else if(obsList.size() == 1) {
+			prevButt.setDisable(true);
+			nextButt.setDisable(true);
+		}else if(obsList.indexOf(selectedPhoto) == obsList.size()-1) { //last photo in list
+			nextButt.setDisable(true);
+			prevButt.setDisable(false);
+		}else if(obsList.indexOf(selectedPhoto) == 0){
+			prevButt.setDisable(true);
+			nextButt.setDisable(false);
+		}else {
+			prevButt.setDisable(false);
+			nextButt.setDisable(false);
+		}
+	}
+	
+	private void noPhotosAlert() {
+		Alert alert = 
+		         new Alert(AlertType.INFORMATION);
+		      alert.setTitle("Error - No Photos in Gallery");
+		      alert.setHeaderText("There are no photos to display at this time.");
+		      alert.showAndWait();
+	}
+	
+	public void prevPic(ActionEvent e) {
+		selectedPhoto = obsList.get(obsList.indexOf(selectedPhoto)-1);
+		captionField.setText(selectedPhoto.getCaption());
+		displayCap.setText(selectedPhoto.getCaption());
+		dateField.setText(selectedPhoto.getDate());
+		displayTags(selectedPhoto);
+		displayPhoto(e);
+	}
+	
+	public void nextPic(ActionEvent e) {
+		selectedPhoto = obsList.get(obsList.indexOf(selectedPhoto)+1);
+		captionField.setText(selectedPhoto.getCaption());
+		displayCap.setText(selectedPhoto.getCaption());
+		dateField.setText(selectedPhoto.getDate());
+		displayTags(selectedPhoto);
+		displayPhoto(e);
+	}
+
 	private void emptySearchFieldAlert() {
 		Alert alert = 
 		         new Alert(AlertType.INFORMATION);
