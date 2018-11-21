@@ -50,10 +50,4 @@ public class Photo {
 	public ObservableList<Tag> getTags(){
 		return this.tags;
 	}
-	
-	public void printTags() {
-		for(Tag t : this.tags) {
-			System.out.println(t.type + "," + t.content);
-		}
-	}
 }
