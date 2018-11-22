@@ -342,7 +342,7 @@ public class LibController {
 	
 	public void deletePhoto(ActionEvent e) {
 		
-		
+		imageDisplay.getChildren().clear();
 		imageDisplay.getChildren().removeAll(obsList);
 		
 		String path = "src/Images/stock/";
@@ -503,6 +503,8 @@ public class LibController {
 	
 	//Album Menu Methods
 	public void createAlbum(ActionEvent e) {
+		
+		
 		MenuItem createOption = new MenuItem();
 		Image thumbnaildefault = new Image("http://www.nust.na/sites/all/modules/media_gallery/images/empty_gallery.png", 100, 0, false, false);
 		//Album currAlbum = new Album();
