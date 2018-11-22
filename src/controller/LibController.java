@@ -62,12 +62,12 @@ public class LibController {
 	private static final String directory = "data";
 	private static final String filename = "photoLib";
 	File[] fileList;
-	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
+	public ObservableList<Photo> obsList = FXCollections.observableArrayList();
 	private TextArea txtArea;
 	private Text actionStatus;
 	private static final String defaultFileName = "temporary.jpg";
 	private Stage savedStage;
-	private ObservableList<Album> albumListView = FXCollections.observableArrayList();;
+	private ObservableList<Album> albumListView = FXCollections.observableArrayList();
 	
 	@FXML MenuItem logoutButt;
 	@FXML MenuButton  userButton;
@@ -342,6 +342,39 @@ public class LibController {
 	
 	public void deletePhoto(ActionEvent e) {
 		
+		
+		imageDisplay.getChildren().removeAll(obsList);
+		
+		String path = "src/Images/stock/";
+		
+    	File folder = new File(path);
+    	File[] fileList = folder.listFiles();
+   
+    	
+    	for (File file : fileList) {
+    		if(file.getName().equals(selectedPhoto.caption)){
+    			file.delete();
+    			obsList.remove(selectedPhoto);
+    		}
+    		final Image image = new Image(file.toURI().toString(), 150,0,true,true);
+    		Photo newPhoto = new Photo(file.getName(),image,new GregorianCalendar(), FXCollections.observableArrayList());
+    		obsList.add(newPhoto);
+    		ImageView iv = new ImageView(image);
+    		iv.setImage(image);
+    		iv.setFitWidth(150); 
+    		imageDisplay.getChildren().add(iv);
+    	
+    		iv.setOnMouseClicked(event -> {
+    			captionField.setText(newPhoto.getCaption());
+    			dateField.setText(newPhoto.getDate());
+    			displayTags(newPhoto);
+    			selectedPhoto = newPhoto;
+    			addTagButt.setDisable(false);
+    			deleteTagButt.setDisable(false);
+    			deletePhotoButt.setDisable(false);
+    		});
+    	}
+    	
 	}
 	
 	public void displayPhoto(ActionEvent e) {
@@ -498,6 +531,7 @@ public class LibController {
 		}
 		
 		
+		System.out.println("curr album is: " + curr);
 
 		Photo thumbnail = new Photo ("", thumbnaildefault);
 		ImageView imageView = new ImageView(thumbnaildefault);
