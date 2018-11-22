@@ -1,8 +1,6 @@
 package model;
 
 	import java.io.Serializable;
-	import java.util.ArrayList;
-	import java.util.Collections;
 import java.util.*;
 
 import javafx.beans.InvalidationListener;
@@ -17,6 +15,7 @@ import javafx.scene.image.*;
 	public class Album  {
 		private String album;
 		private String filename;
+		private Image img;
 		/*
 		private static List <Photo> photoData = new ArrayList<>();
 		
@@ -33,7 +32,7 @@ import javafx.scene.image.*;
 		//private static final long serialVersionUID = 1L;
 
 		/** The name. */
-		public String name;
+		public Optional<String> name;
 		
 		/** The photos. */
 		public ArrayList<Photo> photos = new ArrayList<Photo>();
@@ -54,10 +53,15 @@ import javafx.scene.image.*;
 		/**
 		 * Instantiates a new album.
 		 *
-		 * @param name the name
+		 * @param result the name
 		 */
-		public Album(String name) {
-			this.name = name;
+		public Album(Optional<String> result) {
+			name = result;
+		}
+		
+		public Album(Optional<String> result, Image img){
+			name = result;
+			this.img = img;
 		}
 
 		/**

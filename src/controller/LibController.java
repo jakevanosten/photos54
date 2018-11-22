@@ -50,6 +50,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.io.IOException;
 
+import model.*;
 
 public class LibController {
 
@@ -66,7 +67,7 @@ public class LibController {
 	private Text actionStatus;
 	private static final String defaultFileName = "temporary.jpg";
 	private Stage savedStage;
-	private ObservableList<Album> albumListView;
+	private ObservableList<Album> albumListView = FXCollections.observableArrayList();;
 	
 	@FXML MenuItem logoutButt;
 	@FXML MenuButton  userButton;
@@ -469,7 +470,9 @@ public class LibController {
 	
 	//Album Menu Methods
 	public void createAlbum(ActionEvent e) {
-		
+		MenuItem createOption = new MenuItem();
+		Image thumbnaildefault = new Image("http://www.nust.na/sites/all/modules/media_gallery/images/empty_gallery.png", 100, 0, false, false);
+		//Album currAlbum = new Album();
 		/*
 		ArrayList<Photo> photoAlbum =
 		//Album newAlbum = new Album()
@@ -483,8 +486,52 @@ public class LibController {
 				 if (result.isPresent()) { obsList.addAll(e); }
 	
 				 */
-				
-				 
+		TextInputDialog td = new TextInputDialog("Enter new album title: ");
+		
+		td.setHeaderText("Create New Album");
+		td.show();
+		Optional<String> result = td.showAndWait();
+		
+		Album curr = new Album(result, thumbnaildefault);
+		if (result.isPresent()){
+			albumListView.add(curr);
+		}
+		
+		
+
+		Photo thumbnail = new Photo ("", thumbnaildefault);
+		ImageView imageView = new ImageView(thumbnaildefault);
+		
+		imageView.setImage(thumbnaildefault);
+		
+		obsList.add(thumbnail);
+		
+		imageDisplay.getChildren().add(imageView);
+		
+		String path = "src/Images/stock/";
+		
+    	File folder = new File(path);
+    	File[] fileList = folder.listFiles();
+    	for (File file : fileList) {
+    		final Image image = new Image(file.toURI().toString(), 150,0,true,true);
+    		Photo newPhoto = new Photo(file.getName(),image,new GregorianCalendar(), FXCollections.observableArrayList());
+    		obsList.add(newPhoto);
+    		ImageView iv = new ImageView(image);
+    		iv.setImage(image);
+    		iv.setFitWidth(150); 
+    		imageDisplay.getChildren().add(iv);
+    	
+    		iv.setOnMouseClicked(event -> {
+    			captionField.setText(newPhoto.getCaption());
+    			dateField.setText(newPhoto.getDate());
+    			displayTags(newPhoto);
+    			selectedPhoto = newPhoto;
+    			addTagButt.setDisable(false);
+    			deleteTagButt.setDisable(false);
+    			deletePhotoButt.setDisable(false);
+    		});
+    	}
+		
 	}
 	
 	/*

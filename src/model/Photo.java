@@ -25,6 +25,12 @@ public class Photo {
 		this.tags = tags;
 	}
 	
+	//For thumbnail
+	public Photo(String cap, Image img){
+		this.caption = cap;
+		this.img = img;
+	}
+	
 	public void addTag(Tag t) {
 		tags.add(t);
 	}

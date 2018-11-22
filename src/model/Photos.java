@@ -61,7 +61,6 @@ public class Photos extends Application {
 		loginController = loader.getController();
 		libController = loader2.getController();
 		
-		//loader.setController(new loginController(path));
 		
 		loginController.start(primaryStage);
 		
@@ -71,48 +70,7 @@ public class Photos extends Application {
 		primaryStage.show();
 		
 	}
-	/* trying to see if i can load tile pane
-	 protected Void call() throws Exception {
-         DirectoryChooser directoryChooser = new DirectoryChooser();
-         final File selectedDirectory = directoryChooser.showDialog(null);
-         //there is an ImageFileFilter class below
-         File[] imageFiles = selectedDirectory.listFiles(new FilenameFilter());
-
-         tilePane.getChildren().clear();
-         if(){
-        	 
-         }
-         else{
-        	 for (File file : imageFiles) {
-             	try {
-                     ImageView imageView = new ImageView();
-                  
-                     //add imageView to the TilePane
-                     tilePane.getChildren().add(imageView);
-             	} catch (FileNotFoundException e) {             
-             		e.printStackTrace();
-             	}
-         	}   
-         	return null;
-         }
-     }
- 
 	
-	 private class ImageFileFilter implements FileFilter {
-		 
-	        private final String[] validFileExtension = new String[] {"jpg", "jpeg", "png", "gif"}; 
-	        public boolean accept(File pathname) {
-	            for (String extension : validFileExtension) {
-	                if (pathname.getName().toLowerCase().endsWith(extension)) {
-	                    return true;
-	                }
-	            }
-	            return false;
-	        }
-	 
-	    }
-	 
-	 */
 	
 	public static void main(String[] args) {
 		launch(args);
